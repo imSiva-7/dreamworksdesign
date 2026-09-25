@@ -74,7 +74,7 @@ export default function Portfolio() {
     <section
       id="portfolio"
       ref={sectionRef}
-      className="relative bg-white py-24 sm:py-32 overflow-hidden"
+      className="relative bg-white py-24 sm:py-10 overflow-hidden"
     >
       {/* Accent blob */}
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#A6D934]/10 rounded-full blur-3xl pointer-events-none" />
@@ -84,7 +84,7 @@ export default function Portfolio() {
         <div
           className={`reveal ${visible ? "visible" : ""} text-center max-w-2xl mx-auto`}
         >
-          <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-[#A6D934] mb-4 font-[family-name:var(--font-poppins)]">
+          <span className="inline-block text-xl font-semibold tracking-[0.2em] uppercase text-[#A6D934] mb-4 font-[family-name:var(--font-poppins)]">
             CASE STUDIES
           </span>
           <h2 className="text-4xl sm:text-5xl font-bold text-[#0A0A0A] tracking-tight font-[family-name:var(--font-anton)] uppercase">
@@ -125,6 +125,9 @@ export default function Portfolio() {
                       fill
                       sizes="(max-width: 640px) 240px, (max-width: 768px) 280px, 320px"
                       className="object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-105"
+                      loading="lazy"
+                      placeholder="blur"
+                      blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjQ4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzIwIiBoZWlnaHQ9IjQ4MCIgZmlsbD0iI0YyRjJGMiIvPjwvc3ZnPg=="
                     />
 
                     {/* Bottom-to-top gradient (always) */}

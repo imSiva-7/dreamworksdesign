@@ -109,7 +109,7 @@ export default function Services() {
     <section
       id="services"
       ref={sectionRef}
-      className="relative bg-white py-24 sm:py-32 overflow-hidden"
+      className="relative bg-white py-25 sm:py-10 overflow-hidden"
     >
       {/* Subtle background accent */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#A6D934]/10 rounded-full blur-3xl pointer-events-none" />

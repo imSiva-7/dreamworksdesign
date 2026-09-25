@@ -20,6 +20,30 @@ body {
   font-family: var(--font-poppins), sans-serif;
 }
 
+/* Smooth scroll with offset for fixed header */
+html {
+  scroll-padding-top: 80px;
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid #A6D934;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 
 /* ============================================
    ANIMATIONS & EFFECTS
@@ -462,11 +486,25 @@ html {
   }
 }
 
+@keyframes scrollRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
 .animate-scroll-left {
   animation: scrollLeft 40s linear infinite;
 }
 
-.animate-scroll-left:hover {
+.animate-scroll-right {
+  animation: scrollRight 40s linear infinite;
+}
+
+.animate-scroll-left:hover,
+.animate-scroll-right:hover {
   animation-play-state: paused;
 }
 

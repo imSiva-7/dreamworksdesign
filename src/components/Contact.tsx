@@ -83,7 +83,7 @@ export default function Contact() {
     <section
       id="contact"
       ref={sectionRef}
-      className="relative bg-[#F2F2F2] py-24 sm:py-32 overflow-hidden"
+      className="relative bg-[#F2F2F2] py-24 sm:py-10 overflow-hidden"
     >
       {/* Accent blobs */}
       <div className="absolute top-10 left-10 w-72 h-72 bg-[#A6D934]/10 rounded-full blur-3xl pointer-events-none" />
