@@ -3,10 +3,10 @@ import Link from "next/link";
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0A0A0A]">
-      {/* Animated gradient background */}
+      
       <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0A] via-[#1a1a1a] to-[#0A0A0A] animate-gradient opacity-90" />
 
-      {/* Floating blurred blobs with improved animation */}
+      
       <div className="absolute top-20 -left-20 w-72 h-72 bg-[#A6D934]/20 rounded-full blur-3xl animate-float-slow" />
       <div
         className="absolute bottom-10 -right-10 w-96 h-96 bg-[#96D901]/15 rounded-full blur-3xl animate-float-slow"
@@ -17,14 +17,14 @@ export default function Hero() {
         style={{ animationDuration: "4s" }}
       />
 
-      {/* Grid pattern overlay */}
+     
       <div className="absolute inset-0 bg-[linear-gradient(rgba(166,217,52,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(166,217,52,0.03)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
 
-      {/* Content */}
+      
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
      
 
-        {/* Agency Name with animated gradient */}
+        
         <h1 className="animate-fade-up delay-100 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-tight font-[family-name:var(--font-anton)] uppercase">
           Dream Works{" "}
           <span className="inline-block text-[#A6D934] animate-gradient bg-[length:200%_auto] hover:scale-110 transition-transform duration-500 cursor-default">
@@ -32,14 +32,14 @@ export default function Hero() {
           </span>
         </h1>
 
-        {/* Tagline with stagger effect */}
+        
         <p className="animate-fade-up delay-200 mt-6 text-lg sm:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed font-[family-name:var(--font-poppins)]">
           We craft{" "}
           <span className="text-white font-semibold">bold digital experiences</span>{" "}
           that turn ideas into brands people remember.
         </p>
 
-        {/* CTA buttons with enhanced effects */}
+        
         <div className="animate-fade-up delay-300 mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             href="#contact"
@@ -56,7 +56,7 @@ export default function Hero() {
          
         </div>
 
-        {/* Stats row with hover animations */}
+        
         <div className="animate-fade-up delay-500 mt-16 grid grid-cols-3 gap-6 max-w-lg mx-auto text-white/70 font-[family-name:var(--font-poppins)]">
           <div className="group cursor-default transition-transform duration-300 hover:scale-110">
             <p className="text-2xl font-bold text-white group-hover:text-[#A6D934] transition-all">
@@ -86,7 +86,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator with improved animation */}
+     
       
     </section>
   );

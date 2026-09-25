@@ -74,13 +74,13 @@ export default function Portfolio() {
     <section
       id="portfolio"
       ref={sectionRef}
-      className="relative bg-white py-24 sm:py-10 overflow-hidden"
+      className="relative bg-white py-10 sm:py-10 overflow-hidden"
     >
-      {/* Accent blob */}
+     
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#A6D934]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto px-6">
-        {/* Section header */}
+    
         <div
           className={`reveal ${visible ? "visible" : ""} text-center max-w-2xl mx-auto`}
         >
@@ -92,13 +92,13 @@ export default function Portfolio() {
           </h2>
         </div>
 
-        {/* Horizontal Scrolling Carousel */}
+        
         <div className="mt-16 relative">
-          {/* Fade gradients on edges */}
+          
           <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
-          {/* Scrolling container */}
+          
           <div
             className="overflow-hidden"
             onMouseEnter={() => setIsPaused(true)}
@@ -110,14 +110,14 @@ export default function Portfolio() {
                 width: "max-content",
               }}
             >
-              {/* Render projects twice for seamless loop */}
+              
               {[...projects, ...projects].map((project, i) => (
                 <a
                   key={`${project.title}-${i}`}
                   href="#contact"
                   className="group relative block rounded-2xl overflow-hidden border border-[#0A0A0A]/10 flex-shrink-0 w-[240px] sm:w-[280px] md:w-[320px] transition-all duration-500 hover:-translate-y-3 hover:border-[#A6D934] hover:shadow-2xl hover:shadow-[#A6D934]/20 bg-white"
                 >
-                  {/* Image */}
+                  
                   <div className="relative aspect-[2/3] overflow-hidden">
                     <Image
                       src={project.image}
@@ -130,20 +130,20 @@ export default function Portfolio() {
                       blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjQ4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzIwIiBoZWlnaHQ9IjQ4MCIgZmlsbD0iI0YyRjJGMiIvPjwvc3ZnPg=="
                     />
 
-                    {/* Bottom-to-top gradient (always) */}
+                  
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/90 via-[#0A0A0A]/40 to-transparent" />
 
-                    {/* Animated color tint on hover */}
+                   
                     <div className="absolute inset-0 bg-gradient-to-tr from-[#A6D934]/0 via-[#96D901]/0 to-[#A6D934]/0 group-hover:from-[#A6D934]/30 group-hover:via-[#96D901]/15 group-hover:to-[#A6D934]/30 transition-all duration-700" />
 
-                    {/* Animated overlay bars */}
+                    
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#A6D934] via-[#96D901] to-[#A6D934] transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
                       <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#A6D934] via-[#96D901] to-[#A6D934] transform origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-700 delay-100" />
                     </div>
                   </div>
 
-                  {/* Overlay content */}
+                  
                   <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between gap-4 transform transition-transform duration-500 group-hover:translate-y-[-4px]">
                     <div className="transform transition-all duration-500">
                       <p className="text-xs uppercase tracking-[0.15em] text-[#A6D934] font-medium group-hover:text-[#96D901] transition-colors font-[family-name:var(--font-poppins)]">
@@ -154,7 +154,7 @@ export default function Portfolio() {
                       </h3>
                     </div>
 
-                    {/* Arrow badge with rotation */}
+                   
                     <div className="shrink-0 w-9 h-9 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm flex items-center justify-center text-white opacity-0 translate-y-2 scale-75 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 group-hover:rotate-45 group-hover:bg-[#A6D934] group-hover:border-[#A6D934] transition-all duration-500">
                       <svg
                         viewBox="0 0 24 24"
@@ -170,7 +170,7 @@ export default function Portfolio() {
                     </div>
                   </div>
 
-                  {/* Shimmer effect */}
+                 
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none">
                     <div className="absolute top-0 -left-full h-full w-1/2 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[-20deg] group-hover:left-full transition-all duration-1000" />
                   </div>
@@ -179,7 +179,7 @@ export default function Portfolio() {
             </div>
           </div>
 
-          {/* Pause indicator */}
+          
           {isPaused && (
             <div className="absolute top-4 right-4 z-20 px-3 py-1.5 rounded-full bg-[#0A0A0A]/90 backdrop-blur-sm border border-[#A6D934]/30 text-white text-xs font-medium animate-fade-in font-[family-name:var(--font-poppins)]">
               Paused
@@ -187,7 +187,7 @@ export default function Portfolio() {
           )}
         </div>
 
-        {/* Bottom CTA with enhanced animation */}
+       
         <div
           className={`reveal ${visible ? "visible" : ""} mt-14 text-center`}
           style={{ transitionDelay: visible ? "700ms" : "0ms" }}

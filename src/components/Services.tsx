@@ -109,17 +109,17 @@ export default function Services() {
     <section
       id="services"
       ref={sectionRef}
-      className="relative bg-white py-25 sm:py-10 overflow-hidden"
+      className="relative bg-white py-10 sm:py-10 overflow-hidden"
     >
-      {/* Subtle background accent */}
+      
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#A6D934]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto px-6">
-        {/* Section header */}
+        
         <div
           className={`reveal ${visible ? "visible" : ""} text-center max-w-2xl mx-auto`}
         >
-          <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-[#A6D934] mb-4 font-[family-name:var(--font-poppins)]">
+          <span className="inline-block text-xl font-semibold tracking-[0.2em] uppercase text-[#A6D934] mb-4 font-[family-name:var(--font-poppins)]">
             OUR OFFERINGS
           </span>
           <h2 className="text-4xl sm:text-5xl font-bold text-[#0A0A0A] tracking-tight font-[family-name:var(--font-anton)] uppercase">
@@ -131,7 +131,7 @@ export default function Services() {
           </p>
         </div>
 
-        {/* Cards grid */}
+       
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service, i) => (
             <article
@@ -141,30 +141,30 @@ export default function Services() {
               }`}
               style={{ transitionDelay: visible ? `${i * 120}ms` : "0ms" }}
             >
-              {/* Animated background gradient on hover */}
+              
               <div className="absolute inset-0 bg-gradient-to-br from-[#A6D934]/5 via-[#96D901]/5 to-[#A6D934]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              {/* Spotlight effect */}
+             
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b from-[#A6D934]/10 to-transparent blur-2xl" />
               </div>
 
-              {/* Icon with enhanced animation */}
+              
               <div className="relative z-10 w-12 h-12 rounded-xl bg-[#A6D934]/10 border border-[#A6D934]/20 flex items-center justify-center text-[#0A0A0A]/70 group-hover:text-[#0A0A0A] group-hover:scale-125 group-hover:rotate-[-10deg] group-hover:bg-[#A6D934]/20 group-hover:border-[#A6D934] group-hover:shadow-lg group-hover:shadow-[#A6D934]/30 transition-all duration-500">
                 {service.icon}
               </div>
 
-              {/* Title */}
+              
               <h3 className="relative z-10 mt-5 text-lg font-semibold text-[#0A0A0A] group-hover:text-[#A6D934] transition-all font-[family-name:var(--font-poppins)]">
                 {service.title}
               </h3>
 
-              {/* Description */}
+             
               <p className="relative z-10 mt-2 text-sm text-[#0A0A0A]/60 leading-relaxed flex-1 group-hover:text-[#0A0A0A]/80 transition-colors duration-300 font-[family-name:var(--font-poppins)]">
                 {service.description}
               </p>
 
-              {/* Learn more with arrow animation */}
+              
               <div className="relative z-10 mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-[#A6D934] group-hover:text-[#96D901] group-hover:gap-2 transition-all duration-300 font-[family-name:var(--font-poppins)]">
                 Learn more
                 <span className="inline-block transition-transform duration-300 group-hover:translate-x-2">
@@ -172,7 +172,7 @@ export default function Services() {
                 </span>
               </div>
 
-              {/* Shine effect on hover */}
+           
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
                 <div className="absolute top-0 -left-full h-full w-1/2 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-20deg] group-hover:animate-shimmer" />
               </div>

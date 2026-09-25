@@ -28,7 +28,7 @@ export default function Contact() {
           observer.disconnect();
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.15 },
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -51,10 +51,10 @@ export default function Contact() {
   }
 
   function handleChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    // Clear that field's error as the user types
+
     setErrors((prev) => ({ ...prev, [e.target.name]: undefined }));
   }
 
@@ -70,12 +70,10 @@ export default function Contact() {
     }
 
     setStatus("sending");
-    // Simulated API call — replace with a real endpoint later
+
     await new Promise((r) => setTimeout(r, 1200));
     setStatus("sent");
     setForm({ name: "", email: "", message: "" });
-
-    // Reset back to idle after a few seconds
     setTimeout(() => setStatus("idle"), 4000);
   }
 
@@ -83,32 +81,27 @@ export default function Contact() {
     <section
       id="contact"
       ref={sectionRef}
-      className="relative bg-[#F2F2F2] py-24 sm:py-10 overflow-hidden"
+      className="relative bg-[#F2F2F2] py-10 sm:py-20 overflow-hidden"
     >
-      {/* Accent blobs */}
       <div className="absolute top-10 left-10 w-72 h-72 bg-[#A6D934]/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#96D901]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative max-w-5xl mx-auto px-6">
-        {/* Header */}
         <div
           className={`reveal ${visible ? "visible" : ""} text-center max-w-2xl mx-auto`}
         >
-          <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-[#A6D934] mb-4 font-[family-name:var(--font-poppins)]">
+          <span className="inline-block text-xl font-semibold tracking-[0.2em] uppercase text-[#A6D934] mb-4 font-[family-name:var(--font-poppins)]">
             Get in touch
           </span>
           <h2 className="text-4xl sm:text-5xl font-bold text-[#0A0A0A] tracking-tight font-[family-name:var(--font-anton)] uppercase">
             Let&apos;s build something{" "}
-            <span className="text-[#A6D934]">
-              great
-            </span>
+            <span className="text-[#A6D934]">great</span>
           </h2>
           <p className="mt-5 text-[#0A0A0A]/70 text-lg leading-relaxed font-[family-name:var(--font-poppins)]">
             Tell us about your project and we&apos;ll get back within 24 hours.
           </p>
         </div>
 
-        {/* Card */}
         <div
           className={`reveal ${visible ? "visible" : ""} mt-14 rounded-3xl border border-[#0A0A0A]/10 bg-white backdrop-blur-sm p-6 sm:p-10 shadow-xl`}
           style={{ transitionDelay: visible ? "150ms" : "0ms" }}
@@ -175,7 +168,6 @@ export default function Contact() {
 
               {/* Submit */}
               <div className="flex items-center justify-between gap-4 pt-2">
-               
                 <Button
                   type="submit"
                   variant="primary"

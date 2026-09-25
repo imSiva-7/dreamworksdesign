@@ -71,12 +71,12 @@ export default function Footer() {
       ref={sectionRef}
       className="relative bg-[#0A0A0A] border-t border-[#A6D934]/20 py-16 overflow-hidden"
     >
-      {/* Subtle gradient blobs */}
+      
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#A6D934]/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#96D901]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative max-w-5xl mx-auto px-6">
-        {/* Connect with us */}
+       
         <div
           className={`reveal ${visible ? "visible" : ""} text-center`}
         >
@@ -89,7 +89,7 @@ export default function Footer() {
             The most ruthlessly effective for rapidly scalling business on planet earth.
           </p>
 
-          {/* Social Links */}
+          
           <div className="flex items-center justify-center gap-4 flex-wrap">
             {socialLinks.map((social, index) => (
               <a
@@ -105,34 +105,34 @@ export default function Footer() {
                 }}
                 aria-label={social.name}
               >
-                {/* Animated background gradient on hover */}
+                
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#A6D934] to-[#96D901] opacity-0 group-hover:opacity-10 transition-opacity duration-500 blur-xl" />
                 
-                {/* Icon with animation */}
+                
                 <span className="">
                   {social.icon}
                 </span>
                 
-                {/* Tooltip */}
+                
                 <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-lg bg-[#0A0A0A] border border-[#A6D934]/30 text-white text-xs font-medium opacity-0 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:-translate-y-1 whitespace-nowrap shadow-xl font-[family-name:var(--font-poppins)]">
                   {social.name}
                   <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rotate-45 bg-[#0A0A0A] border-l border-t border-[#A6D934]/30" />
                 </span>
 
-                {/* Ripple effect on hover */}
+                
                 <span className="absolute inset-0 rounded-full border-2 border-[#A6D934] scale-100 opacity-0 group-hover:scale-150 group-hover:opacity-0 transition-all duration-700" />
               </a>
             ))}
           </div>
         </div>
 
-        {/* Divider */}
+        
         <div
           className={`reveal ${visible ? "visible" : ""} my-12 h-px bg-gradient-to-r from-transparent via-[#A6D934]/20 to-transparent`}
           style={{ transitionDelay: visible ? "200ms" : "0ms" }}
         />
 
-        {/* Bottom section */}
+      
         <div
           className={`reveal ${visible ? "visible" : ""} flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-white/50 font-[family-name:var(--font-poppins)]`}
           style={{ transitionDelay: visible ? "250ms" : "0ms" }}

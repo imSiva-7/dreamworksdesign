@@ -4,11 +4,10 @@ import Image from "next/image";
 
 export default function FeatureRow() {
   return (
-    <section className="relative bg-[#F2F2F2] py-16 overflow-hidden">
+    <section className="relative bg-[#F2F2F2] py-10 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Section Label */}
         <div className="text-center mb-12">
-          <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-[#A6D934] mb-2 font-[family-name:var(--font-poppins)]">
+          <span className="inline-block text-xl font-semibold tracking-[0.2em] uppercase text-[#A6D934] mb-2 font-[family-name:var(--font-poppins)]">
             Featured In
           </span>
           <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0A0A] font-[family-name:var(--font-anton)] uppercase">
@@ -16,9 +15,7 @@ export default function FeatureRow() {
           </h2>
         </div>
 
-        {/* Row 1 - Scrolling Left to Right */}
         <div className="relative mb-8 overflow-hidden">
-          {/* Fade gradients on edges */}
           <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#F2F2F2] to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#F2F2F2] to-transparent z-10 pointer-events-none" />
 
@@ -29,7 +26,6 @@ export default function FeatureRow() {
                 width: "max-content",
               }}
             >
-              {/* Render row 1 multiple times for seamless loop */}
               {[...Array(6)].map((_, index) => (
                 <div
                   key={index}
@@ -49,9 +45,7 @@ export default function FeatureRow() {
           </div>
         </div>
 
-        {/* Row 2 - Scrolling Right to Left */}
         <div className="relative mb-8 overflow-hidden">
-          {/* Fade gradients on edges */}
           <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#F2F2F2] to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#F2F2F2] to-transparent z-10 pointer-events-none" />
 
@@ -62,7 +56,6 @@ export default function FeatureRow() {
                 width: "max-content",
               }}
             >
-              {/* Render row 2 multiple times for seamless loop */}
               {[...Array(6)].map((_, index) => (
                 <div
                   key={index}
@@ -82,9 +75,7 @@ export default function FeatureRow() {
           </div>
         </div>
 
-        {/* Row 3 - Scrolling Left to Right */}
         <div className="relative overflow-hidden">
-          {/* Fade gradients on edges */}
           <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#F2F2F2] to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#F2F2F2] to-transparent z-10 pointer-events-none" />
 
@@ -96,7 +87,7 @@ export default function FeatureRow() {
                 animationDuration: "45s",
               }}
             >
-              {/* Render row 3 multiple times for seamless loop */}
+              
               {[...Array(6)].map((_, index) => (
                 <div
                   key={index}

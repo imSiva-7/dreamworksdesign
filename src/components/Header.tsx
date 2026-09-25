@@ -28,13 +28,13 @@ export default function Header() {
     >
       <nav className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
+          
           <Link
             href="/"
             className="group flex items-center gap-b2 transition-transform duration-300 hover:scale-105"
           >
             <div className="relative">
-              {/* Animated ring */}
+             
               <div className="absolute inset-0 rounded-xl border-2 border-[#A6D934] scale-100 opacity-0 group-hover:scale-125 group-hover:opacity-0 transition-all duration-500" />
             </div>
             <span
@@ -44,7 +44,7 @@ export default function Header() {
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
+          
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
@@ -61,7 +61,7 @@ export default function Header() {
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
+         
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className={`md:hidden p-2 rounded-lg transition-colors duration-300 font-[family-name:var(--font-poppins)] 
@@ -94,7 +94,7 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Mobile Menu */}
+       
         <div
           className={`md:hidden overflow-hidden transition-all duration-300 ${
             isMobileMenuOpen ? "h-screen mt-6" : "max-h-0"
