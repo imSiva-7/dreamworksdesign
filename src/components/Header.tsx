@@ -3,10 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-type NavLink = {
-  name: string;
-  href: string;
-};
+type NavLink = { name: string; href: string };
 
 const navLinks: NavLink[] = [
   { name: "Services", href: "#services" },
@@ -19,10 +16,7 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = (): void => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
+    const handleScroll = (): void => setIsScrolled(window.scrollY > 20);
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -35,14 +29,11 @@ export default function Header() {
     };
   }, [isMobileMenuOpen]);
 
-  // Close on Escape
   useEffect(() => {
     if (!isMobileMenuOpen) return;
-
     const onKey = (e: KeyboardEvent): void => {
       if (e.key === "Escape") setIsMobileMenuOpen(false);
     };
-
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [isMobileMenuOpen]);
@@ -61,23 +52,33 @@ export default function Header() {
         }
       `}
     >
+      {/* ══════════════════════════════════════════════════════════
+          BLURRED BACKDROP — pre-warmed
+          - backdrop-blur-xl is ALWAYS applied (never toggled).
+            The browser builds the blur layer on mount, so opening
+            the menu is a pure opacity fade — no first-paint hitch.
+          - Only opacity + pointer-events flip with state.
+          - will-change hints the compositor to keep the layer hot.
+          - translate-z-0 forces GPU promotion in Safari.
+      ══════════════════════════════════════════════════════════ */}
       <div
         onClick={() => setIsMobileMenuOpen(false)}
         aria-hidden="true"
         className={`
           md:hidden fixed inset-0 -z-10
-          transition-opacity duration-300
+          backdrop-blur-xl bg-[#0A0A0A]/70
+          transition-opacity duration-300 ease-out
+          will-change-[opacity] transform-gpu
           ${
             isMobileMenuOpen
-              ? "opacity-100 backdrop-blur-xl bg-[#0A0A0A]/70"
-              : "opacity-0 pointer-events-none backdrop-blur-0 bg-transparent"
+              ? "opacity-100"
+              : "opacity-0 pointer-events-none"
           }
         `}
       />
 
       <nav className="relative max-w-7xl mx-auto px-5 sm:px-6 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
           <Link
             href="/"
             className="group flex items-center gap-2 transition-transform duration-300 hover:scale-105"
@@ -87,7 +88,6 @@ export default function Header() {
             </span>
           </Link>
 
-          {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
@@ -101,7 +101,6 @@ export default function Header() {
             ))}
           </div>
 
-          {/* Mobile toggle */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 rounded-lg transition-colors duration-300 text-white hover:bg-white/10 relative z-10"
@@ -115,25 +114,14 @@ export default function Header() {
               viewBox="0 0 24 24"
             >
               {isMobileMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               )}
             </svg>
           </button>
         </div>
 
-        {/* Mobile menu */}
         <div
           className={`
             md:hidden overflow-hidden transition-all duration-300
