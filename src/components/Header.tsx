@@ -52,15 +52,7 @@ export default function Header() {
         }
       `}
     >
-      {/* ══════════════════════════════════════════════════════════
-          BLURRED BACKDROP — pre-warmed
-          - backdrop-blur-xl is ALWAYS applied (never toggled).
-            The browser builds the blur layer on mount, so opening
-            the menu is a pure opacity fade — no first-paint hitch.
-          - Only opacity + pointer-events flip with state.
-          - will-change hints the compositor to keep the layer hot.
-          - translate-z-0 forces GPU promotion in Safari.
-      ══════════════════════════════════════════════════════════ */}
+
       <div
         onClick={() => setIsMobileMenuOpen(false)}
         aria-hidden="true"
