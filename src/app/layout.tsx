@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Anton, Poppins } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const anton = Anton({
   weight: "400",
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </a>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
