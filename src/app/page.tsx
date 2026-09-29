@@ -13,8 +13,7 @@ export default function Home() {
       <Services />
       <FeatureRow />
       <Portfolio /> 
-      <Contact />
-     
+      <Contact /> 
     </main>
   );
 }
