@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <radialGradient id="sky"><stop stop-color="#164C87"/><stop offset="1" stop-color="#0B1428"/></radialGradient>
+    <linearGradient id="wave"><stop stop-color="#4A7CDF"/><stop offset=".5" stop-color="#7CC4FF"/><stop offset="1" stop-color="#315EA8"/></linearGradient>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r="1.4" fill="#7CC4FF" opacity=".35"/></pattern>
+  </defs>
+  <path fill="url(#sky)" d="M0 0h1920v1080H0z"/>
+  <path fill="url(#dots)" d="M0 0h1920v1080H0z"/>
+  <g fill="none" stroke="url(#wave)" opacity=".6">
+    <path d="M-100 650Q400 230 960 650T2020 650" stroke-width="3"/>
+    <path d="M-100 674Q400 254 960 674T2020 674" stroke-width="2"/>
+    <path d="M-100 698Q400 278 960 698T2020 698" stroke-width="2"/>
+    <path d="M-100 722Q400 302 960 722T2020 722"/>
+    <path d="M-100 746Q400 326 960 746T2020 746"/>
+  </g>
+</svg>

@@ -1,164 +1,67 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 
-type NavLink = { name: string; href: string };
-
-const navLinks: NavLink[] = [
+const navLinks = [
   { name: "Services", href: "#services" },
-  { name: "Portfolio", href: "#portfolio" },
+  { name: "Projects", href: "#portfolio" },
   { name: "Contact", href: "#contact" },
 ];
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    let ticking = false;
-    const handleScroll = (): void => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          setIsScrolled(window.scrollY > 20);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isMobileMenuOpen]);
-
-  useEffect(() => {
     if (!isMobileMenuOpen) return;
-    const onKey = (e: KeyboardEvent): void => {
-      if (e.key === "Escape") setIsMobileMenuOpen(false);
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMobileMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
     };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    const handleOutside = (event: PointerEvent) => {
+      if (!headerRef.current?.contains(event.target as Node)) setIsMobileMenuOpen(false);
+    };
+    const desktop = window.matchMedia("(min-width: 768px)");
+    const handleResize = () => { if (desktop.matches) setIsMobileMenuOpen(false); };
+    document.addEventListener("keydown", handleKey);
+    document.addEventListener("pointerdown", handleOutside);
+    desktop.addEventListener("change", handleResize);
+    return () => {
+      document.removeEventListener("keydown", handleKey);
+      document.removeEventListener("pointerdown", handleOutside);
+      desktop.removeEventListener("change", handleResize);
+    };
   }, [isMobileMenuOpen]);
-
-  const closeMenu = useCallback(() => setIsMobileMenuOpen(false), []);
 
   return (
-    <>
-      <header
-        className={`
-          fixed top-0 left-0 right-0 z-50
-          transition-colors duration-200
-          ${
-            isScrolled && !isMobileMenuOpen
-              ? "bg-[#0A0A0A]/90 backdrop-blur-md border-b border-white/10 shadow-lg shadow-black/20"
-              : "bg-transparent border-b border-transparent"
-          }
-        `}
-      >
-        <nav className="max-w-7xl mx-auto px-5 sm:px-6 py-4">
-          <div className="flex items-center justify-between">
-            <Link
-              href="/"
-              onClick={closeMenu}
-              className="group flex items-center gap-2 relative z-50"
-            >
-              <span className="text-xl text-[#A6D934] font-bold tracking-tight font-[family-name:var(--font-anton)] uppercase">
-                DreamWorks <span className="align-super text-[0.6em]">®</span>
-              </span>
-            </Link>
-
-       
-            <div className="hidden md:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="relative text-sm font-medium group font-[family-name:var(--font-poppins)] text-white/90 hover:text-white transition-colors duration-300"
-                >
-                  {link.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#A6D934] transition-all duration-300 group-hover:w-full" />
-                </Link>
-              ))}
-            </div>
-
-         
-            <button
-              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-              className="md:hidden p-2 rounded-lg text-white relative z-50 focus:outline-none"
-              aria-label="Toggle menu"
-              aria-expanded={isMobileMenuOpen}
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                {isMobileMenuOpen ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                )}
-              </svg>
-            </button>
+    <header ref={headerRef} className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%_-_2rem)] sm:w-[calc(100%_-_4rem)] max-w-6xl">
+      <nav aria-label="Main navigation" className={`rounded-full border px-5 sm:pl-8 sm:pr-4 py-3 sm:py-3.5 backdrop-blur-md transition-colors duration-300 ${isScrolled || isMobileMenuOpen ? "bg-ink/55 border-white/25 shadow-xl shadow-ink/15" : "bg-white/10 border-white/30 shadow-lg shadow-black/10"}`}>
+        <div className="flex items-center justify-between gap-4">
+          <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="text-xl text-accent tracking-tight font-[family-name:var(--font-anton)] uppercase whitespace-nowrap">Forma Studio</Link>
+          <div className="hidden md:flex items-center gap-8 lg:gap-12">
+            {navLinks.map((link) => <Link key={link.name} href={link.href} className="text-sm font-medium text-white/85 transition-colors hover:text-accent">{link.name}</Link>)}
+            <Link href="#contact" className="rounded-full bg-accent px-5 py-3 text-sm font-semibold text-ink transition-colors hover:bg-accent-hover">Let&apos;s talk <span aria-hidden="true" className="ml-1">↗</span></Link>
           </div>
-        </nav>
-      </header>
-
-    
-      <div
-        className={`
-          md:hidden fixed inset-0 z-40 bg-[#0A0A0A]
-          flex flex-col justify-center items-center px-6
-          transition-all duration-200 ease-out
-          will-change-[transform,opacity]
-          ${
-            isMobileMenuOpen
-              ? "opacity-100 translate-y-0 pointer-events-auto"
-              : "opacity-0 -translate-y-4 pointer-events-none"
-          }
-        `}
-      >
-        <div className="flex flex-col gap-6 w-full max-w-sm">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              onClick={closeMenu}
-              className="
-                px-4 py-3 rounded-xl text-2xl uppercase text-center font-semibold
-                font-[family-name:var(--font-poppins)]
-                text-white  active:bg-white/10
-                transition-colors
-              "
-            >
-              {link.name}
-            </Link>
-          ))}
+          <button ref={menuButtonRef} type="button" onClick={() => setIsMobileMenuOpen((open) => !open)} className="md:hidden flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white" aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"} aria-expanded={isMobileMenuOpen} aria-controls="mobile-navigation">
+            <svg aria-hidden="true" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" viewBox="0 0 24 24"><path d={isMobileMenuOpen ? "M6 6l12 12M6 18 18 6" : "M4 7h16M4 12h16M4 17h16"} /></svg>
+          </button>
         </div>
-      </div>
-    </>
+      </nav>
+      <nav id="mobile-navigation" aria-label="Mobile navigation" hidden={!isMobileMenuOpen} className="md:hidden mt-3 rounded-3xl border border-white/20 bg-ink/90 p-3 shadow-xl backdrop-blur-md">
+        {navLinks.map((link) => <Link key={link.name} href={link.href} onClick={() => setIsMobileMenuOpen(false)} className="block rounded-2xl px-5 py-4 text-white transition-colors hover:bg-white/10 active:bg-white/10">{link.name}<span aria-hidden="true" className="float-right text-accent">↗</span></Link>)}
+      </nav>
+    </header>
   );
 }

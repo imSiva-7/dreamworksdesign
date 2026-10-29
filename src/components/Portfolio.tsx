@@ -1,208 +1,106 @@
 "use client";
 
 import Image from "next/image";
+import MovingRail from "./MovingRail";
 import { useEffect, useRef, useState } from "react";
 
-// Update these with your actual project images from /public folder
 const projects = [
-  {
-    title: "Lumen Finance",
-    category: "Web Design",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
-  },
-  {
-    title: "Aster Skincare",
-    category: "Branding",
-    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80",
-  },
-  {
-    title: "Nova Mobile App",
-    category: "UI/UX Design",
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80",
-  },
-  {
-    title: "Prism Studio",
-    category: "Web Design",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
-  },
-  {
-    title: "Echo Sound",
-    category: "Branding",
-    image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80",
-  },
-  {
-    title: "Vault Crypto",
-    category: "Web Design",
-    image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&q=80",
-  },
-  {
-    title: "Zenith Wellness",
-    category: "UI/UX Design",
-    image: "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800&q=80",
-  },
-  {
-    title: "Pixel Agency",
-    category: "Branding",
-    image: "https://images.unsplash.com/photo-1542744094-3a31f272c490?w=800&q=80",
-  },
+  { title: "Lumen Finance", category: "Web Design", image: "/projects/lumen-finance.svg", summary: "A calmer way to see the bigger financial picture.", challenge: "Make a complex financial dashboard feel clear, useful, and approachable.", approach: "A focused balance summary, gentle green palette, and simple spending charts put the most useful information first.", deliverables: ["Visual direction", "Dashboard design", "Responsive interface"] },
+  { title: "Aster Skincare", category: "Branding", image: "/projects/aster-skincare.svg", summary: "An everyday ritual with a naturally refined identity.", challenge: "Give a botanical skincare range a distinctive presence without overwhelming the product.", approach: "Warm neutrals, generous spacing, and restrained packaging typography create a quiet, tactile identity.", deliverables: ["Brand identity", "Packaging concept", "Art direction"] },
+  { title: "Nova Mobile App", category: "UI/UX Design", image: "/projects/nova-mobile.svg", summary: "A little more space for the things that matter.", challenge: "Create a welcoming daily wellness app with a clear starting point.", approach: "Soft lavender surfaces and a simple content hierarchy make daily recommendations easy to discover.", deliverables: ["Mobile UI", "Component system", "Interaction direction"] },
+  { title: "Prism Studio", category: "Web Design", image: "/projects/prism-studio.svg", summary: "Architecture with room to breathe.", challenge: "Let an architecture studio's spaces take the lead while keeping navigation effortless.", approach: "Editorial typography, earthy tones, and large architectural compositions create a considered portfolio.", deliverables: ["Website concept", "Art direction", "Responsive layout"] },
+  { title: "Echo Sound", category: "Branding", image: "/projects/echo-sound.svg", summary: "An identity you can almost hear.", challenge: "Build a memorable visual identity for a bold personal audio brand.", approach: "Oversized lettering, a warm orange backdrop, and a sculptural product composition bring energy to the brand.", deliverables: ["Brand direction", "Product illustration", "Campaign concept"] },
+  { title: "Vault Crypto", category: "Web Design", image: "/projects/vault-crypto.svg", summary: "Complex markets. A clearer perspective.", challenge: "Present market activity and portfolio information in a scan-friendly interface.", approach: "A deep navy foundation, clear value hierarchy, and selective green accents highlight the information that matters.", deliverables: ["Dashboard UI", "Data visualization", "Design system"] },
+  { title: "Zenith Wellness", category: "UI/UX Design", image: "/projects/zenith-wellness.svg", summary: "A digital pause in a busy world.", challenge: "Design a wellness experience that feels restorative from the first visit.", approach: "Landscape-inspired illustration, sage tones, and an uncluttered layout establish a slower visual rhythm.", deliverables: ["Landing page", "Illustration", "Visual identity"] },
+  { title: "Pixel Agency", category: "Branding", image: "/projects/pixel-agency.svg", summary: "Small studio. Big creative energy.", challenge: "Give a creative studio a playful identity with a strong digital presence.", approach: "Geometric forms, oversized typography, and contrasting pastel panels build a flexible graphic language.", deliverables: ["Brand identity", "Graphic system", "Website concept"] },
 ];
 
 export default function Portfolio() {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const [visible, setVisible] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const [selected, setSelected] = useState<(typeof projects)[number] | null>(null);
 
   useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+    if (!selected) return;
+    const dialog = dialogRef.current;
+    const previousOverflow = document.body.style.overflow;
+    dialog?.showModal();
+    if (dialog) dialog.scrollTop = 0;
+    document.body.style.overflow = "hidden";
+    return () => {
+      dialog?.close();
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [selected]);
 
   return (
-    <section
-      id="portfolio"
-      ref={sectionRef}
-      className="relative bg-white py-10 sm:py-10 overflow-hidden"
-    >
-     
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#A6D934]/10 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="relative max-w-6xl mx-auto px-6">
-    
-        <div
-          className={`reveal ${visible ? "visible" : ""} text-center max-w-2xl mx-auto`}
-        >
-          <span className="inline-block text-xl font-semibold tracking-[0.2em] uppercase text-[#A6D934] mb-4 font-[family-name:var(--font-poppins)]">
-            CASE STUDIES
-          </span>
-          <h2 className="text-4xl sm:text-5xl font-bold text-[#0A0A0A] tracking-tight font-[family-name:var(--font-anton)] uppercase">
-            BECOME OUR NEXT SUCCESS STORY
-          </h2>
+    <section id="portfolio" aria-labelledby="portfolio-heading" className="bg-surface py-16 sm:py-24 overflow-hidden">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6">
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-accent-ink mb-3">Selected projects</p>
+          <h2 id="portfolio-heading" className="text-4xl sm:text-5xl lg:text-6xl text-ink font-[family-name:var(--font-anton)] uppercase">Imagined with purpose.<br /><span className="text-accent-ink">Made to stand out.</span></h2>
+          <p className="mt-5 text-sm sm:text-base text-ink/65">A closer look at the brands and digital experiences we bring to life.</p>
         </div>
-
-        
-        <div className="mt-16 relative">
-          
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
-
-          
-          <div
-            className="overflow-hidden"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-          >
-            <div
-              className={`flex gap-4 sm:gap-6 ${isPaused ? "" : "animate-scroll-left"}`}
-              style={{
-                width: "max-content",
-              }}
+        <MovingRail label="Projects" count={projects.length} speed={28} suspended={Boolean(selected)} renderItem={(index, duplicate) => {
+          const project = projects[index];
+          const colors = ["from-[#427B82] to-[#173C4C]", "from-[#AB826F] to-[#674B41]", "from-[#8C79B3] to-[#49396E]", "from-[#758C65] to-[#3B5033]", "from-[#D18C53] to-[#854E37]", "from-[#42678F] to-[#1D3558]", "from-[#739181] to-[#3A5C52]", "from-[#747DB2] to-[#3A4270]"];
+          const phone = index === 2;
+          const packaging = index === 1 || index === 4 || index === 7;
+          return (
+            <button
+              key={project.title}
+              type="button"
+              tabIndex={duplicate ? -1 : undefined}
+              onClick={() => setSelected(project)}
+              aria-haspopup="dialog"
+              aria-label={`Preview ${project.title}`}
+              className={`project-showcase-card group flex h-[500px] sm:h-[530px] w-full flex-col overflow-hidden rounded-3xl bg-gradient-to-br ${colors[index]} p-6 sm:p-7 text-left text-white`}
             >
-              
-              {[...projects, ...projects].map((project, i) => (
-                <a
-                  key={`${project.title}-${i}`}
-                  href="#contact"
-                  className="group relative block rounded-2xl overflow-hidden border border-[#0A0A0A]/10 flex-shrink-0 w-[240px] sm:w-[280px] md:w-[320px] transition-all duration-500 hover:-translate-y-3 hover:border-[#A6D934] hover:shadow-2xl hover:shadow-[#A6D934]/20 bg-white"
-                >
-                  
-                  <div className="relative aspect-[2/3] overflow-hidden">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      sizes="(max-width: 640px) 240px, (max-width: 768px) 280px, 320px"
-                      className="object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-105"
-                      loading="lazy"
-                      placeholder="blur"
-                      blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjQ4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzIwIiBoZWlnaHQ9IjQ4MCIgZmlsbD0iI0YyRjJGMiIvPjwvc3ZnPg=="
-                    />
-
-                  
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/90 via-[#0A0A0A]/40 to-transparent" />
-
-                   
-                    <div className="absolute inset-0 bg-gradient-to-tr from-[#A6D934]/0 via-[#96D901]/0 to-[#A6D934]/0 group-hover:from-[#A6D934]/30 group-hover:via-[#96D901]/15 group-hover:to-[#A6D934]/30 transition-all duration-700" />
-
-                    
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#A6D934] via-[#96D901] to-[#A6D934] transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
-                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#A6D934] via-[#96D901] to-[#A6D934] transform origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-700 delay-100" />
-                    </div>
+              <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-white/70">{project.category}</p>
+              <h3 className="mt-3 max-w-[260px] text-3xl sm:text-4xl leading-[1.05] font-[family-name:var(--font-anton)] uppercase">{project.title}</h3>
+              <div className="relative flex flex-1 min-h-0 items-center justify-center py-6" aria-hidden="true">
+                <div className="absolute bottom-7 left-8 right-8 h-5 rounded-[50%] bg-black/25 blur-lg" />
+                <div className={`project-device ${phone ? "project-device-phone" : packaging ? "project-device-brand" : "project-device-laptop"}`}>
+                  <div className={`relative overflow-hidden bg-ink shadow-2xl ${phone ? "aspect-[9/17] rounded-[24px] border-[5px] border-ink" : packaging ? "aspect-square rounded-xl border-[5px] border-white/20" : "aspect-[16/11] rounded-t-xl rounded-b-sm border-[6px] border-ink"}`}>
+                    <Image src={project.image} alt="" fill sizes="(max-width: 640px) 260px, 320px" className={`object-cover ${packaging ? "object-center" : "object-top"}`} />
+                    {phone && <div className="absolute top-1 left-1/2 -translate-x-1/2 h-2.5 w-12 rounded-full bg-ink" />}
                   </div>
-
-                  
-                  <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between gap-4 transform transition-transform duration-500 group-hover:translate-y-[-4px]">
-                    <div className="transform transition-all duration-500">
-                      <p className="text-xs uppercase tracking-[0.15em] text-[#A6D934] font-medium group-hover:text-[#96D901] transition-colors font-[family-name:var(--font-poppins)]">
-                        {project.category}
-                      </p>
-                      <h3 className="mt-1 text-lg font-semibold text-white font-[family-name:var(--font-poppins)]">
-                        {project.title}
-                      </h3>
-                    </div>
-
-                   
-                    <div className="shrink-0 w-9 h-9 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm flex items-center justify-center text-white opacity-0 translate-y-2 scale-75 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 group-hover:rotate-45 group-hover:bg-[#A6D934] group-hover:border-[#A6D934] transition-all duration-500">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="w-4 h-4 -rotate-45 group-hover:text-[#0A0A0A]"
-                      >
-                        <path d="M7 17L17 7M17 7H9M17 7v8" />
-                      </svg>
-                    </div>
-                  </div>
-
-                 
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none">
-                    <div className="absolute top-0 -left-full h-full w-1/2 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[-20deg] group-hover:left-full transition-all duration-1000" />
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-
-          
-          {isPaused && (
-            <div className="absolute top-4 right-4 z-20 px-3 py-1.5 rounded-full bg-[#0A0A0A]/90 backdrop-blur-sm border border-[#A6D934]/30 text-white text-xs font-medium animate-fade-in font-[family-name:var(--font-poppins)]">
-              Paused
-            </div>
-          )}
-        </div>
-
-       
-        <div
-          className={`reveal ${visible ? "visible" : ""} mt-14 text-center`}
-          style={{ transitionDelay: visible ? "700ms" : "0ms" }}
-        >
-          <a
-            href="#contact"
-            className="group inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#A6D934] text-[#0A0A0A] font-semibold hover:bg-[#96D901] hover:scale-105 hover:shadow-lg hover:shadow-[#A6D934]/30 transition-all duration-300 relative overflow-hidden font-[family-name:var(--font-poppins)]"
-          >
-            <span className="relative z-10">GET STARTED</span>
-            <span className="relative z-10 inline-block transition-transform duration-300 group-hover:translate-x-2">
-              →
-            </span>
-          </a>
-        </div>
+                  {!phone && !packaging && <div className="project-laptop-base" />}
+                </div>
+              </div>
+              <div className="flex items-end justify-between gap-4 border-t border-white/25 pt-4">
+                <div><p className="text-[9px] tracking-widest text-white/55">0{index + 1} / PROJECT</p><p className="mt-1.5 text-xs font-medium text-white/90">Explore the story</p></div>
+                <span aria-hidden="true" className="flex h-10 w-10 items-center justify-center rounded-full border border-accent/60 text-accent transition-colors group-hover:bg-accent group-hover:text-ink">↗</span>
+              </div>
+            </button>
+          );
+        }} />
       </div>
+      <dialog ref={dialogRef} aria-labelledby="project-title" onClose={() => setSelected(null)} onClick={(event) => { if (event.target === event.currentTarget) dialogRef.current?.close(); }} className="project-dialog fixed inset-0 m-auto max-h-[90svh] w-[calc(100%_-_2rem)] max-w-4xl overflow-y-auto rounded-3xl bg-surface p-0 text-ink shadow-2xl backdrop:bg-ink/70 backdrop:backdrop-blur-sm">
+        {selected && (
+          <>
+            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-ink/10 bg-surface/95 px-5 py-3 backdrop-blur-sm">
+              <span className="text-xs font-semibold uppercase tracking-widest text-accent-ink">{selected.category}</span>
+              <button type="button" autoFocus onClick={() => dialogRef.current?.close()} aria-label="Close project preview" className="flex h-11 w-11 items-center justify-center rounded-full bg-canvas text-xl transition-colors hover:bg-accent">×</button>
+            </div>
+            <div className="grid md:grid-cols-2">
+              <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[560px] bg-canvas">
+                <Image src={selected.image} alt={`${selected.title} full design mockup`} fill sizes="(max-width: 768px) 100vw, 450px" className="object-contain" />
+              </div>
+              <div className="p-6 sm:p-9">
+                <h3 id="project-title" className="text-3xl sm:text-4xl font-[family-name:var(--font-anton)] uppercase">{selected.title}</h3>
+                <p className="mt-3 text-lg text-accent-ink">{selected.summary}</p>
+                <h4 className="mt-7 text-xs font-semibold tracking-widest uppercase">The brief</h4>
+                <p className="mt-2 text-sm leading-relaxed text-ink/70">{selected.challenge}</p>
+                <h4 className="mt-6 text-xs font-semibold tracking-widest uppercase">The direction</h4>
+                <p className="mt-2 text-sm leading-relaxed text-ink/70">{selected.approach}</p>
+                <ul aria-label="Project deliverables" className="mt-6 flex flex-wrap gap-2">
+                  {selected.deliverables.map((item) => <li key={item} className="rounded-full border border-ink/10 px-3 py-1.5 text-xs">{item}</li>)}
+                </ul>
+              </div>
+            </div>
+          </>
+        )}
+      </dialog>
     </section>
   );
 }

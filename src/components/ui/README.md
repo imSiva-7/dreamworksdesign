@@ -1,6 +1,6 @@
 # Reusable UI Components
 
-This directory contains reusable UI components for the DreamWorks Design application.
+This directory contains reusable UI components for the Forma Studio application.
 
 ## Components
 

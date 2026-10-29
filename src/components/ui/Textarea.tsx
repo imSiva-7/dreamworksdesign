@@ -11,7 +11,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const textareaId = id || props.name;
 
     const baseStyles =
-      "w-full rounded-xl bg-[#F2F2F2] border border-[#0A0A0A]/10 px-4 py-3 text-[#0A0A0A] placeholder-[#0A0A0A]/40 outline-none transition-colors focus:border-[#A6D934] focus:bg-white focus:ring-2 focus:ring-[#A6D934]/20 resize-none font-[family-name:var(--font-poppins)]";
+      "w-full rounded-xl bg-canvas border border-ink/10 px-4 py-3 text-ink placeholder-ink/40 outline-none transition-colors focus:border-accent focus:bg-surface focus:ring-2 focus:ring-accent/20 resize-none font-[family-name:var(--font-poppins)]";
     
     const errorStyles = error ? "border-red-500 focus:border-red-500 focus:ring-red-100" : "";
 
@@ -20,7 +20,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {label && (
           <label
             htmlFor={textareaId}
-            className="block text-sm font-medium text-[#0A0A0A] mb-2 font-[family-name:var(--font-poppins)]"
+            className="block text-sm font-medium text-ink mb-2 font-[family-name:var(--font-poppins)]"
           >
             {label}
           </label>
@@ -28,14 +28,16 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         <textarea
           ref={ref}
           id={textareaId}
+          aria-invalid={Boolean(error)}
+          aria-describedby={error ? `${textareaId}-error` : helperText ? `${textareaId}-hint` : undefined}
           className={`${baseStyles} ${errorStyles} ${className}`}
           {...props}
         />
         {error && (
-          <p className="mt-1.5 text-xs text-red-600 font-[family-name:var(--font-poppins)]">{error}</p>
+          <p id={`${textareaId}-error`} role="alert" className="mt-1.5 text-xs text-red-600 font-[family-name:var(--font-poppins)]">{error}</p>
         )}
         {helperText && !error && (
-          <p className="mt-1.5 text-xs text-[#0A0A0A]/50 font-[family-name:var(--font-poppins)]">{helperText}</p>
+          <p id={`${textareaId}-hint`} className="mt-1.5 text-xs text-ink/50 font-[family-name:var(--font-poppins)]">{helperText}</p>
         )}
       </div>
     );

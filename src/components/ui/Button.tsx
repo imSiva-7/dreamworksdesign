@@ -24,13 +24,13 @@ export default function Button({
 
   const variantStyles = {
     primary:
-      "bg-[#A6D934] text-[#0A0A0A] hover:scale-105 hover:shadow-lg hover:shadow-[#A6D934]/40 hover:bg-[#96D901]",
+      "bg-accent text-ink hover:scale-105 hover:shadow-lg hover:shadow-accent/40 hover:bg-accent-hover",
     secondary:
-      "bg-[#0A0A0A] text-white hover:scale-105 hover:bg-[#1a1a1a]",
+      "bg-ink text-white hover:scale-105 hover:bg-ink-soft",
     outline:
-      "border-2 border-[#0A0A0A]/20 text-[#0A0A0A] bg-transparent hover:bg-[#F2F2F2] hover:border-[#A6D934]",
+      "border-2 border-ink/20 text-ink bg-transparent hover:bg-canvas hover:border-accent",
     ghost:
-      "text-[#0A0A0A] bg-transparent hover:bg-[#F2F2F2]",
+      "text-ink bg-transparent hover:bg-canvas",
   };
 
   const sizeStyles = {
@@ -45,17 +45,17 @@ export default function Button({
     lg: "w-5 h-5",
   };
 
-  const LoadingSpinner = () => (
+  const loadingSpinner = (
     <span
       className={`${spinnerSizes[size]} rounded-full border-2 ${
         variant === "primary"
-          ? "border-[#0A0A0A]/30 border-t-[#0A0A0A]"
+          ? "border-ink/30 border-t-ink"
           : "border-white/30 border-t-white"
       } animate-spin`}
     />
   );
 
-  const Arrow = () => (
+  const arrow = (
     <span className="transition-transform duration-300 group-hover:translate-x-1">
       →
     </span>
@@ -69,7 +69,7 @@ export default function Button({
     >
       {loading ? (
         <>
-          <LoadingSpinner />
+          {loadingSpinner}
           {children}
         </>
       ) : (
@@ -77,7 +77,7 @@ export default function Button({
           {icon && iconPosition === "left" && icon}
           {children}
           {icon && iconPosition === "right" && icon}
-          {!icon && iconPosition === "right" && variant === "primary" && <Arrow />}
+          {!icon && iconPosition === "right" && variant === "primary" && arrow}
         </>
       )}
     </button>

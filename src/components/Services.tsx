@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import MovingRail from "./MovingRail";
 
 const services = [
   {
@@ -83,102 +83,68 @@ const services = [
   },
 ];
 
-export default function Services() {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const [visible, setVisible] = useState(false);
+const details = [
+  { tags: ["Research", "Wireframes", "Design systems"], color: "from-[#172B4A] to-[#284A79]", label: "Designed around people" },
+  { tags: ["Next.js", "Responsive", "Performance"], color: "from-[#2458C6] to-[#142C67]", label: "Built for the real world" },
+  { tags: ["Identity", "Strategy", "Art direction"], color: "from-[#29495B] to-[#132B3D]", label: "Made to be remembered" },
+  { tags: ["Content", "Campaigns", "Analytics"], color: "from-[#384B83] to-[#18274C]", label: "A little more momentum" },
+];
 
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15 },
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
+function ServiceArtwork({ index }: { index: number }) {
   return (
-    <section
-      id="services"
-      ref={sectionRef}
-      className="relative bg-white py-10 sm:py-10 overflow-hidden"
-    >
-      
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#A6D934]/10 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="relative max-w-6xl mx-auto px-6">
-        
-        <div
-          className={`reveal ${visible ? "visible" : ""} text-center max-w-2xl mx-auto`}
-        >
-          <span className="inline-block text-xl font-semibold tracking-[0.2em] uppercase text-[#A6D934] mb-4 font-[family-name:var(--font-poppins)]">
-            OUR OFFERINGS
-          </span>
-          <h2 className="text-4xl sm:text-5xl font-bold text-[#0A0A0A] tracking-tight font-[family-name:var(--font-anton)] uppercase">
-            Services built for <span className="text-[#A6D934]">impact</span>
-          </h2>
-          <p className="mt-5 text-[#0A0A0A]/70 text-lg leading-relaxed font-[family-name:var(--font-poppins)]">
-            Growing a business is hard. We make it a whole lot easier, more
-            predictable, less stressful, and more fun.
-          </p>
+    <div aria-hidden="true" className="offering-art relative h-44 my-5 flex items-center justify-center">
+      {index === 0 && (
+        <div className="offering-art-object w-52 rounded-2xl border border-white/25 bg-white/10 p-4 shadow-xl">
+          <div className="flex gap-1.5 mb-4">{[0, 1, 2].map((dot) => <span key={dot} className="h-1.5 w-1.5 rounded-full bg-white/40" />)}</div>
+          <div className="flex gap-3"><div className="w-14 rounded-xl bg-accent/80" /><div className="flex-1 space-y-2"><div className="h-3 w-20 bg-white/80 rounded" /><div className="h-2 w-full bg-white/20 rounded" /><div className="h-2 w-16 bg-white/20 rounded" /><div className="h-6 w-20 bg-accent/80 rounded-full mt-3" /></div></div>
         </div>
+      )}
+      {index === 1 && (
+        <div className="offering-art-object w-56 rounded-2xl border border-white/25 bg-ink/60 p-5 shadow-xl font-mono text-xs leading-7">
+          <p className="text-accent">&lt;FormaStudio&gt;</p><p className="pl-3 text-white/70">ideas.map(build)</p><p className="pl-3 text-white/70">craft.every(detail)</p><p className="text-accent">&lt;/FormaStudio&gt;<span className="offering-cursor ml-1">▍</span></p>
+        </div>
+      )}
+      {index === 2 && (
+        <div className="offering-art-object relative flex h-36 w-52 items-center justify-center">
+          <span className="absolute left-3 top-1 h-28 w-28 rounded-full border border-accent/70" /><span className="absolute right-3 bottom-1 h-28 w-28 rounded-full bg-accent/20" />
+          <span className="relative text-7xl text-white font-[family-name:var(--font-anton)]">Aa<span className="text-accent">.</span></span>
+        </div>
+      )}
+      {index === 3 && (
+        <div className="offering-art-object flex h-32 items-end gap-3 rounded-2xl border border-white/20 bg-white/5 px-6 py-5">
+          {[35, 55, 43, 75, 95].map((height, i) => <span key={height} className="offering-bar w-6 rounded-t-md bg-accent" style={{ height: height + "%", animationDelay: i * 180 + "ms", opacity: 0.4 + i * 0.15 }} />)}
+        </div>
+      )}
+    </div>
+  );
+}
 
-       
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((service, i) => (
-            <article
-              key={service.title}
-              className={`service-card group rounded-2xl border border-[#0A0A0A]/10 bg-white backdrop-blur-sm p-6 flex flex-col cursor-pointer relative overflow-hidden reveal shadow-sm hover:shadow-xl hover:border-[#A6D934] ${
-                visible ? "visible" : ""
-              }`}
-              style={{ transitionDelay: visible ? `${i * 120}ms` : "0ms" }}
-            >
-              
-              <div className="absolute inset-0 bg-gradient-to-br from-[#A6D934]/5 via-[#96D901]/5 to-[#A6D934]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-             
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b from-[#A6D934]/10 to-transparent blur-2xl" />
-              </div>
-
-              
-              <div className="relative z-10 w-12 h-12 rounded-xl bg-[#A6D934]/10 border border-[#A6D934]/20 flex items-center justify-center text-[#0A0A0A]/70 group-hover:text-[#0A0A0A] group-hover:scale-125 group-hover:rotate-[-10deg] group-hover:bg-[#A6D934]/20 group-hover:border-[#A6D934] group-hover:shadow-lg group-hover:shadow-[#A6D934]/30 transition-all duration-500">
-                {service.icon}
-              </div>
-
-              
-              <h3 className="relative z-10 mt-5 text-lg font-semibold text-[#0A0A0A] group-hover:text-[#A6D934] transition-all font-[family-name:var(--font-poppins)]">
-                {service.title}
-              </h3>
-
-             
-              <p className="relative z-10 mt-2 text-sm text-[#0A0A0A]/60 leading-relaxed flex-1 group-hover:text-[#0A0A0A]/80 transition-colors duration-300 font-[family-name:var(--font-poppins)]">
-                {service.description}
-              </p>
-
-              
-              <div className="relative z-10 mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-[#A6D934] group-hover:text-[#96D901] group-hover:gap-2 transition-all duration-300 font-[family-name:var(--font-poppins)]">
-                Learn more
-                <span className="inline-block transition-transform duration-300 group-hover:translate-x-2">
-                  →
-                </span>
-              </div>
-
-           
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
-                <div className="absolute top-0 -left-full h-full w-1/2 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-20deg] group-hover:animate-shimmer" />
-              </div>
+export default function Services() {
+  return (
+    <section id="services" aria-labelledby="services-heading" className="bg-surface py-16 sm:py-24 overflow-hidden">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-8">
+          <div>
+            <p className="text-xs font-semibold tracking-[0.2em] uppercase text-accent-ink mb-3">Our offerings</p>
+            <h2 id="services-heading" className="text-4xl sm:text-5xl lg:text-6xl text-ink font-[family-name:var(--font-anton)] uppercase">Good ideas.<br /><span className="text-accent-ink">Great execution.</span></h2>
+          </div>
+          <p className="max-w-sm text-sm sm:text-base text-ink/65 leading-relaxed">From a first spark to a finished experience. Four ways we help your next idea move forward.</p>
+        </div>
+        <MovingRail label="Offerings" count={services.length} speed={22} renderItem={(index, duplicate) => {
+          const service = services[index];
+          const detail = details[index];
+          return (
+            <article className={`offering-card group relative flex h-full min-h-[460px] flex-col overflow-hidden rounded-3xl bg-gradient-to-br ${detail.color} p-6 sm:p-7 text-white`}>
+              <div className="flex items-center justify-between"><span className="text-[10px] font-medium tracking-[0.2em] text-white/55">0{index + 1} / EXPERTISE</span><span className="text-accent">{service.icon}</span></div>
+              <h3 className="mt-5 text-3xl font-[family-name:var(--font-anton)] uppercase">{service.title}</h3>
+              <p className="mt-1 text-xs text-accent/90">{detail.label}</p>
+              <ServiceArtwork index={index} />
+              <p className="text-sm leading-relaxed text-white/75">{service.description}</p>
+              <div className="mt-4 mb-6 flex flex-wrap gap-1.5">{detail.tags.map((tag) => <span key={tag} className="rounded-full border border-white/15 px-2.5 py-1 text-[9px] text-white/65">{tag}</span>)}</div>
+              <a href="#contact" tabIndex={duplicate ? -1 : undefined} aria-label={`Discuss ${service.title}`} className="mt-auto flex items-center justify-between border-t border-white/20 pt-4 text-xs font-medium text-white transition-colors hover:text-accent">Let&apos;s make it happen <span aria-hidden="true" className="text-xl text-accent">↗</span></a>
             </article>
-          ))}
-        </div>
+          );
+        }} />
       </div>
     </section>
   );

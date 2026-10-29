@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Forma Studio
 
-## Getting Started
+A fictional creative studio website built as an internship design and development
+exercise, using Next.js 16, React 19, TypeScript, and Tailwind CSS 4.
 
-First, run the development server:
+## Run locally
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Install dependencies with npm install, then run npm run dev.
+Open http://localhost:3000.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Checks
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- npm run lint
+- npx tsc --noEmit
+- npm run build
+- npm start (after building)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The production build uses Next.js's supported Webpack option because the default
+Turbopack production build encountered an internal worker error on Windows.
+Development continues to use Turbopack.
 
-## Learn More
+## Features
 
-To learn more about Next.js, take a look at the following resources:
+- Responsive floating glass navigation with an accessible mobile disclosure.
+- Muted background video with pause control and reduced-motion support.
+- Technology marquees and moving offerings cards with animated artwork.
+- Eight fictional projects with local SVG mockups, a moving device showcase, and
+  native dialog previews with keyboard support. Both moving rows support pause,
+  hover/focus suspension, touch scrolling, arrow controls, and reduced motion.
+- Contact form demonstration with field validation, loading, success, and retry
+  states. It does not send or persist messages.
+- Self-hosted Anton and Poppins Latin fonts so builds need no font downloads.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Assets
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Project illustrations and the video fallback are local SVG files in public/.
+Project names and briefs are fictional.
+Video details are in public/VIDEO_CREDITS.md.
+The bundled font license is in src/app/fonts/OFL.txt.
 
-## Deploy on Vercel
+## Verified
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Browser checks covered 390px mobile and 1440px desktop layouts, mobile menu
+dismissal, project dialogs and Escape, gallery arrows, invalid and valid form
+submission, section link targets, image loading, and video playback.

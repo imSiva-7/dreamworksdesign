@@ -64,6 +64,8 @@ export default function Contact() {
     setErrors(validation);
 
     if (Object.keys(validation).length > 0) {
+      const firstError = Object.keys(validation)[0];
+      document.getElementById(firstError)?.focus();
       setShake(true);
       setTimeout(() => setShake(false), 500);
       return;
@@ -74,45 +76,45 @@ export default function Contact() {
     await new Promise((r) => setTimeout(r, 1200));
     setStatus("sent");
     setForm({ name: "", email: "", message: "" });
-    setTimeout(() => setStatus("idle"), 4000);
+
   }
 
   return (
     <section
       id="contact"
       ref={sectionRef}
-      className="relative bg-[#F2F2F2] py-10 sm:py-20 overflow-hidden"
+      className="relative bg-canvas py-10 sm:py-20 overflow-hidden"
     >
-      <div className="absolute top-10 left-10 w-72 h-72 bg-[#A6D934]/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#96D901]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-10 left-10 w-72 h-72 bg-accent/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-96 h-96 bg-accent-hover/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative max-w-5xl mx-auto px-6">
         <div
           className={`reveal ${visible ? "visible" : ""} text-center max-w-2xl mx-auto`}
         >
-          <span className="inline-block text-xl font-semibold tracking-[0.2em] uppercase text-[#A6D934] mb-4 font-[family-name:var(--font-poppins)]">
+          <span className="inline-block text-xl font-semibold tracking-[0.2em] uppercase text-accent-ink mb-4 font-[family-name:var(--font-poppins)]">
             Get in touch
           </span>
-          <h2 className="text-4xl sm:text-5xl font-bold text-[#0A0A0A] tracking-tight font-[family-name:var(--font-anton)] uppercase">
+          <h2 className="text-4xl sm:text-5xl font-bold text-ink tracking-tight font-[family-name:var(--font-anton)] uppercase">
             Let&apos;s build something{" "}
-            <span className="text-[#A6D934]">great</span>
+            <span className="text-accent-ink">great</span>
           </h2>
-          <p className="mt-5 text-[#0A0A0A]/70 text-lg leading-relaxed font-[family-name:var(--font-poppins)]">
-            Tell us about your project and we&apos;ll get back within 24 hours.
+          <p className="mt-5 text-ink/70 text-lg leading-relaxed font-[family-name:var(--font-poppins)]">
+            Try the form interaction below. This concept demo validates your details without sending or storing them.
           </p>
         </div>
 
         <div
-          className={`reveal ${visible ? "visible" : ""} mt-14 rounded-3xl border border-[#0A0A0A]/10 bg-white backdrop-blur-sm p-6 sm:p-10 shadow-xl`}
+          className={`reveal ${visible ? "visible" : ""} mt-14 rounded-3xl border border-ink/10 bg-surface backdrop-blur-sm p-6 sm:p-10 shadow-xl`}
           style={{ transitionDelay: visible ? "150ms" : "0ms" }}
         >
           {status === "sent" ? (
-            <div className="text-center py-12">
-              <div className="animate-pop mx-auto w-16 h-16 rounded-full bg-[#A6D934] flex items-center justify-center shadow-lg">
+            <div role="status" className="text-center py-12">
+              <div className="animate-pop mx-auto w-16 h-16 rounded-full bg-accent flex items-center justify-center shadow-lg">
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
-                  stroke="#0A0A0A"
+                  stroke="var(--text-dark)"
                   strokeWidth="3"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -121,12 +123,13 @@ export default function Contact() {
                   <path d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h3 className="mt-6 text-2xl font-semibold text-[#0A0A0A] font-[family-name:var(--font-poppins)]">
-                Message sent!
+              <h3 className="mt-6 text-2xl font-semibold text-ink font-[family-name:var(--font-poppins)]">
+                Demo complete!
               </h3>
-              <p className="mt-2 text-[#0A0A0A]/70 font-[family-name:var(--font-poppins)]">
-                Thanks for reaching out — we&apos;ll be in touch soon.
+              <p className="mt-2 text-ink/70 font-[family-name:var(--font-poppins)]">
+                Your details passed validation. This demo has not sent a message.
               </p>
+              <Button type="button" variant="outline" className="mt-6" onClick={() => setStatus("idle")}>Try again</Button>
             </div>
           ) : (
             <form
@@ -139,6 +142,8 @@ export default function Contact() {
                   label="Name"
                   name="name"
                   type="text"
+                  autoComplete="name"
+                  required
                   value={form.name}
                   onChange={handleChange}
                   placeholder="Jane Doe"
@@ -149,6 +154,8 @@ export default function Contact() {
                   label="Email"
                   name="email"
                   type="email"
+                  autoComplete="email"
+                  required
                   value={form.email}
                   onChange={handleChange}
                   placeholder="jane@studio.com"
@@ -160,6 +167,7 @@ export default function Contact() {
                 label="Message"
                 name="message"
                 rows={5}
+                required
                 value={form.message}
                 onChange={handleChange}
                 placeholder="Tell us about your project…"
@@ -174,7 +182,7 @@ export default function Contact() {
                   disabled={status === "sending"}
                   loading={status === "sending"}
                 >
-                  {status === "sending" ? "Sending…" : "Send Message"}
+                  {status === "sending" ? "Checking…" : "Try demo form"}
                 </Button>
               </div>
             </form>
